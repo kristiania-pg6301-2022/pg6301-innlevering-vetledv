@@ -1,0 +1,12 @@
+{
+  "name": "pg6301innlevering",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/kristiania-pg6301-2022/pg6301-innlevering-vetledv.git",
+  "author": "Vetle de Vries <vetle1608@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^7.0.0",
+    "prettier": "^2.5.1"
+  }
+}
