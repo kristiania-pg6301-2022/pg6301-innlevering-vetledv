@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { Link } from 'react-router-dom'
+import { MutRes, TMutate } from '../interfaces/components'
 import { Answers, TQuestions } from '../interfaces/fetch'
 
 const fetchQuestions = (url: string) => {
@@ -29,10 +30,26 @@ export const RandomQuestion = () => {
     ['question'],
     fetchQuestions('/api/questions')
   )
-  const checkAnswer = useMutation(
-    ({ id, answer }: { id: number; answer: string }) =>
-      postJSON('/api/questions', { id, answer })
+  const checkAnswer = useMutation<MutRes, Error, TMutate, () => void>(
+    ({ id, answer }) => postJSON('/api/questions', { id, answer })
   )
+
+  const handleSubmit = async () => {
+    if (answer !== '' && query.data) {
+      const data = checkAnswer.mutate(
+        {
+          id: query.data.id,
+          answer: answer,
+        },
+        {
+          onSuccess: (answerRes) => {
+            queryClient.setQueryData(['answer', query.data.id], answerRes)
+          },
+        }
+      )
+    }
+  }
+
   return (
     <>
       <h1>Random Question</h1>
@@ -54,34 +71,13 @@ export const RandomQuestion = () => {
                       name='answer'
                       onChange={(event) => {
                         setAnswer(event.target.value)
-                        console.log(answer)
                       }}
                     />
                     {query.data.answers[a as keyof Answers]}
                   </label>
                 </div>
               ))}
-            <button
-              onClick={async () => {
-                if (answer !== '') {
-                  const data = checkAnswer.mutate(
-                    {
-                      id: query.data.id,
-                      answer: answer,
-                    },
-                    {
-                      onSuccess: (answerRes) => {
-                        queryClient.setQueryData(
-                          ['answer', query.data.id],
-                          answerRes
-                        )
-                      },
-                    }
-                  )
-                }
-              }}>
-              Submit
-            </button>
+            <button onClick={() => handleSubmit()}>Submit</button>
             {checkAnswer.isSuccess && <div>{checkAnswer.data.result}</div>}
           </div>
         )}

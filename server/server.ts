@@ -21,11 +21,6 @@ app.post(
       return res.json({ result: 'correct' })
     } else return res.json({ result: 'incorrect' })
   }
-  // for (let i = 0; i < question.alternatives.length; i++) {
-  //   if (question.alternatives[i] === answer) {
-  //     return res.json({ result: 'correct' })
-  //   } else return res.json({ result: 'incorrect' })
-  // }
 )
 
 app.use(express.static('../client/dist'))
