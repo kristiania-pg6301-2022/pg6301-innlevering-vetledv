@@ -1,18 +1,11 @@
 import { useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { Link } from 'react-router-dom'
-import { MutRes, TMutate } from '../interfaces/components'
+import { AnswerCorrect, TMutate } from '../interfaces/components'
 import { TQuestions } from '../interfaces/fetch'
+import { useRandomQuestion } from './../hooks/useQuestions'
 
-const fetchQuestions = (url: string) => {
-  return async () => {
-    const res = await fetch(url)
-    const data = await res.json()
-    return data
-  }
-}
-
-export const postJSON = async (url: string, json: Object) => {
+const postQuestions = async (url: string, json: Object) => {
   const res = await fetch(url, {
     method: 'post',
     headers: {
@@ -26,12 +19,9 @@ export const postJSON = async (url: string, json: Object) => {
 export const RandomQuestion = () => {
   const queryClient = useQueryClient()
   const [answer, setAnswer] = useState<string>('')
-  const query = useQuery<TQuestions, Error>(
-    ['question'],
-    fetchQuestions('/api/questions')
-  )
-  const checkAnswer = useMutation<MutRes, Error, TMutate, () => void>(
-    ({ id, answer }) => postJSON('/api/questions', { id, answer })
+  const query = useRandomQuestion('api/questions')
+  const checkAnswer = useMutation<AnswerCorrect, Error, TMutate, () => void>(
+    ({ id, answer }) => postQuestions('/api/questions', { id, answer })
   )
 
   const handleSubmit = async () => {

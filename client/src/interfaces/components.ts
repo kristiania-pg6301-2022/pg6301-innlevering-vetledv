@@ -3,4 +3,4 @@ export interface TMutate {
   answer: string
 }
 
-export type MutRes = {answerCorrect:boolean}
+export type AnswerCorrect = {answerCorrect:boolean}
