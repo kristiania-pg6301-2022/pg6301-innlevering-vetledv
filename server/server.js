@@ -1,16 +1,32 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import * as path from 'path'
-import { getRandomQuestion } from './questions.js'
+import { getRandomQuestion, isCorrectAnswer, questions } from './questions.js'
 
 const app = express()
 
 app.use(bodyParser.json())
 
 app.get('/api/questions', (req, res) => {
-    const { id, category, question, answers } = getRandomQuestion()
-    res.json({ id, category, question, answers })
-  })
+  const { id, category, question, answers } = getRandomQuestion()
+  res.json({ id, category, question, answers })
+})
+
+app.post(
+  '/api/questions',
+  (req, res) => {
+    const { id, answer } = req.body
+    const question = questions.find((q) => q.id === id)
+    if (isCorrectAnswer(question, answer)) {
+      return res.json({ result: 'correct' })
+    } else return res.json({ result: 'incorrect' })
+  }
+  // for (let i = 0; i < question.alternatives.length; i++) {
+  //   if (question.alternatives[i] === answer) {
+  //     return res.json({ result: 'correct' })
+  //   } else return res.json({ result: 'incorrect' })
+  // }
+)
 
 app.use(express.static('../client/dist'))
 app.use((req, res, next) => {
