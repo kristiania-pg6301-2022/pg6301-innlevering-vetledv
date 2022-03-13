@@ -1,9 +1,8 @@
 import bodyParser from 'body-parser'
-import { Express } from 'express'
-import express from 'express'
+import express, { Express } from 'express'
 import { AddressInfo } from 'net'
 import * as path from 'path'
-import { getRandomQuestion, questions, isCorrectAnswer } from './questions'
+import { quizApp } from './quizApi'
 
 export interface TReqResNext {
   req: express.Request
@@ -14,22 +13,7 @@ export interface TReqResNext {
 const app: Express = express()
 app.use(bodyParser.json())
 
-app.get('/api/questions', (req: express.Request, res: express.Response) => {
-  const { id, category, question, answers } = getRandomQuestion()
-  res.json({ id, category, question, answers })
-})
-
-app.post('/api/questions', (req: express.Request, res: express.Response) => {
-  const { id, answer }: { id: number; answer: string } = req.body
-  const question = questions.find((q) => q.id === id)
-  if (question) {
-    let answerCorrect = false
-    if (isCorrectAnswer(question, answer)) {
-      answerCorrect = true
-      return res.json({ answerCorrect })
-    } else return res.json({ answerCorrect })
-  }
-})
+app.use('/api', quizApp)
 
 app.use(express.static('../client/dist'))
 app.use(

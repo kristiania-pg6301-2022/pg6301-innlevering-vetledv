@@ -1,11 +1,4 @@
 import { TQuestions } from '../../client/src/interfaces/fetch'
-export const getRandomQuestion = (): TQuestions => {
-  return questions[Math.trunc(Math.random() * questions.length)]
-}
-
-export const isCorrectAnswer = (question: TQuestions, answer: string) => {
-  return question?.correct_answers[answer + '_correct'] === 'true'
-}
 
 //https://quizapi.io/api/v1/questions?apiKey=YOUR_API_KEY&difficulty=Easy&limit=10&tags=JavaScript
 export const questions: TQuestions[] = [

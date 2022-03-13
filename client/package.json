@@ -6,7 +6,7 @@
     "dev": "parcel watch public/index.html",
     "build": "yarn install --production=false && yarn build:parcel",
     "build:parcel": "parcel build public/index.html",
-    "test": "jest"
+    "test": "jest --collectCoverage"
   },
   "dependencies": {
     "@parcel/transformer-react-refresh-wrap": "^2.3.2",
@@ -16,11 +16,29 @@
     "react-router-dom": "^6.2.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.17.5",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "@babel/preset-typescript": "^7.16.7",
     "@types/jest": "^27.4.1",
+    "@types/pretty": "^2.0.1",
     "@types/react": "^17.0.40",
     "@types/react-dom": "^17.0.13",
+    "babel-jest": "^27.5.1",
     "jest": "^27.5.1",
     "parcel": "^2.3.2",
+    "pretty": "^2.0.0",
+    "ts-jest": "^27.1.3",
     "typescript": "^4.6.2"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "collectCoverageFrom": [
+      "**/*.{jsx,tsx,ts,js}",
+      "!dist/**",
+      "!babel.config.js",
+      "!index.tsx",
+      "!interfaces/"
+    ]
   }
 }
