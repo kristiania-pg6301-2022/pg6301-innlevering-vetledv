@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { Link } from 'react-router-dom'
 import { MutRes, TMutate } from '../interfaces/components'
-import { Answers, TQuestions } from '../interfaces/fetch'
+import { TQuestions } from '../interfaces/fetch'
 
 const fetchQuestions = (url: string) => {
   return async () => {
@@ -61,7 +61,7 @@ export const RandomQuestion = () => {
           <div>
             <div>{query.data.question}</div>
             {Object.keys(query.data.answers)
-              .filter((a) => query.data.answers[a as keyof Answers])
+              .filter((a) => query.data.answers[a])
               .map((a) => (
                 <div key={a}>
                   <label>
@@ -73,12 +73,18 @@ export const RandomQuestion = () => {
                         setAnswer(event.target.value)
                       }}
                     />
-                    {query.data.answers[a as keyof Answers]}
+                    {query.data.answers[a]}
                   </label>
                 </div>
               ))}
             <button onClick={() => handleSubmit()}>Submit</button>
-            {checkAnswer.isSuccess && <div>{checkAnswer.data.result}</div>}
+            {checkAnswer.isSuccess && (
+              <div>
+                {checkAnswer.data.answerCorrect
+                  ? 'Correct!'
+                  : 'Wrong, try again'}
+              </div>
+            )}
           </div>
         )}
       </div>
