@@ -14,7 +14,8 @@
     "build:server": "cd server && yarn build",
     "start": "cd server && yarn start",
     "p:check": "prettier --check **/*.{js,jsx,ts,tsx}",
-    "p:format": "prettier --write **/*.{js,jsx,ts,tsx}"
+    "p:format": "prettier --write **/*.{js,jsx,ts,tsx}",
+    "test": "jest"
   },
   "devDependencies": {
     "concurrently": "^7.0.0",
