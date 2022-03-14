@@ -1,9 +1,13 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { Button } from '../components/Button'
 
 export const Home = () => {
+  const navigate = useNavigate()
   return (
     <>
-      <Link to={'/question'}>Get a random question</Link>
+      <Button clickHandler={() => navigate('/question')}>
+        Get a random question
+      </Button>
     </>
   )
 }

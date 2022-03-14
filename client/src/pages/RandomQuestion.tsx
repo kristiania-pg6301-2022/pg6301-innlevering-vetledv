@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { AnswerCorrect, TMutate } from '../interfaces/components'
 import { TQuestions } from '../interfaces/fetch'
 import { useRandomQuestion } from './../hooks/useQuestions'
@@ -18,6 +18,7 @@ const postQuestions = async (url: string, json: Object) => {
 }
 
 export const RandomQuestion = () => {
+  const navigate = useNavigate()
   const queryClient = useQueryClient()
   const [answer, setAnswer] = useState<string>('')
   const query = useRandomQuestion('api/questions')
@@ -43,8 +44,7 @@ export const RandomQuestion = () => {
 
   return (
     <>
-      <h1>Random Question</h1>
-      <Link to={'/'}>Back</Link>
+      <Button clickHandler={() => query.refetch()}>Get a new question</Button>
       <div>
         {query.isLoading && <div>Loading...</div>}
         {query.isError && <div>Error: {query.error.message}</div>}
@@ -68,7 +68,10 @@ export const RandomQuestion = () => {
                   </label>
                 </div>
               ))}
-            <Button handleClick={handleSubmit} />
+            <div className='flex gap-2'>
+              <Button clickHandler={() => handleSubmit()}>Submit</Button>
+              <Button clickHandler={() => navigate('/')}>Back</Button>
+            </div>
             {checkAnswer.isSuccess && (
               <div>
                 {checkAnswer.data.answerCorrect
