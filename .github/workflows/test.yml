@@ -16,9 +16,9 @@ jobs:
           node-version: 16.x
       - run: npm ci
       - run: npm install
-        working-directory: client
-      - run: npm install
         working-directory: server
+      - run: npm install
+        working-directory: client
       - run: npm run verify
       - name: Coveralls
         uses: coverallsapp/github-action@master
