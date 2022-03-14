@@ -18,7 +18,6 @@ const queryClient = new QueryClient({
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={true} />
       <BrowserRouter>
         <Layout>
           <Routes>
@@ -28,6 +27,7 @@ const App = () => {
           </Routes>
         </Layout>
       </BrowserRouter>
+      <ReactQueryDevtools initialIsOpen />
     </QueryClientProvider>
   )
 }

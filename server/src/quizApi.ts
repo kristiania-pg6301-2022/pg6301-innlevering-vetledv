@@ -7,7 +7,7 @@ export const getRandomQuestion = (): TQuestions => {
 }
 
 export const isCorrectAnswer = (question: TQuestions, answer: string) => {
-  return question?.correct_answers[answer + '_correct'] === 'true'
+  return question.correct_answers[answer + '_correct'] === 'true'
 }
 
 export const quizApp = express.Router()
