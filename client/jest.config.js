@@ -12,6 +12,7 @@ module.exports = {
     '!postcss.config.js',
     '!tailwind.config.js',
     '!jest.config.js',
+    '!coverage/**'
   ],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
 }
