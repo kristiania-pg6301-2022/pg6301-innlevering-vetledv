@@ -21,6 +21,8 @@
     "verify:client": "cd client && yarn verify"
   },
   "devDependencies": {
+    "@types/body-parser": "^1.19.2",
+    "@types/express": "^4.17.13",
     "@types/jest": "^27.4.1",
     "concurrently": "^7.0.0",
     "coveralls": "^3.1.1",
