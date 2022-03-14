@@ -7,7 +7,7 @@
     "build": "yarn install --production=false && yarn build:parcel",
     "build:parcel": "parcel build public/index.html",
     "test": "jest --collectCoverage",
-    "verify": "yarn tsc && yarn test"
+    "verify": "tsc"
   },
   "dependencies": {
     "@parcel/transformer-react-refresh-wrap": "^2.3.2",
