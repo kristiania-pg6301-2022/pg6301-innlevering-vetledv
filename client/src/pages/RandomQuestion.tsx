@@ -45,26 +45,28 @@ export const RandomQuestion = () => {
   return (
     <>
       <Button clickHandler={() => query.refetch()}>Get a new question</Button>
-      <div>
+      <div className='border border-gray-700 px-4 py-2'>
         {query.isLoading && <div>Loading...</div>}
         {query.isError && <div>Error: {query.error.message}</div>}
         {query.data && (
           <div>
-            <div>{query.data.question}</div>
+            <div className='text-xl font-bold py-2 shadow-md'>{query.data.question}</div>
             {Object.keys(query.data.answers)
               .filter((a) => query.data.answers[a])
               .map((a) => (
-                <div key={a}>
-                  <label>
-                    <input
-                      type='radio'
-                      value={a}
-                      name='answer'
-                      onChange={(event) => {
-                        setAnswer(event.target.value)
-                      }}
-                    />
-                    {query.data.answers[a]}
+                <div className='py-2' key={a}>
+                  <label className='flex flex-row'>
+                    <div className='px-1'>
+                      <input
+                        type='radio'
+                        value={a}
+                        name='answer'
+                        onChange={(event) => {
+                          setAnswer(event.target.value)
+                        }}
+                      />
+                    </div>
+                    <div className='px-1'>{query.data.answers[a]}</div>
                   </label>
                 </div>
               ))}
