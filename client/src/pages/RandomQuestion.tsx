@@ -50,7 +50,9 @@ export const RandomQuestion = () => {
         {query.isError && <div>Error: {query.error.message}</div>}
         {query.data && (
           <div>
-            <div className='text-2xl font-bold py-2 shadow-md'>{query.data.question}</div>
+            <div className='text-2xl font-bold py-2 shadow-md'>
+              {query.data.question}
+            </div>
             {Object.keys(query.data.answers)
               .filter((a) => query.data.answers[a])
               .map((a) => (
