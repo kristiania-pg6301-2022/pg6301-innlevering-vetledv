@@ -7,7 +7,8 @@
     "dev": "nodemon --ext ts,js,json --exec yarn start",
     "build": "yarn install",
     "start": "ts-node src/server.ts",
-    "test": "jest --collectCoverage"
+    "test": "jest --collectCoverage",
+    "verify": "yarn tsc && yarn test"
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",

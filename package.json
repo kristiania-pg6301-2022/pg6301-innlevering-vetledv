@@ -15,11 +15,15 @@
     "start": "cd server && yarn start",
     "p:check": "prettier --check **/*.{js,jsx,ts,tsx}",
     "p:format": "prettier --write **/*.{js,jsx,ts,tsx}",
-    "test": "jest"
+    "test": "jest",
+    "verify": "yarn p:check && yarn test && yarn verify:server && yarn verify:client",
+    "verify:server": "cd server && yarn verify",
+    "verify:client": "cd client && yarn verify"
   },
   "devDependencies": {
     "@types/jest": "^27.4.1",
     "concurrently": "^7.0.0",
+    "coveralls": "^3.1.1",
     "jest": "^27.5.1",
     "prettier": "^2.5.1"
   },
