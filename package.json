@@ -21,30 +21,12 @@
     "verify:client": "cd client && yarn verify"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.5",
-    "@babel/preset-env": "^7.16.11",
-    "@babel/preset-react": "^7.16.7",
-    "@babel/preset-typescript": "^7.16.7",
     "@types/jest": "^27.4.1",
     "concurrently": "^7.0.0",
     "coveralls": "^3.1.1",
     "jest": "^27.5.1",
-    "prettier": "^2.5.1"
-  },
-  "jest": {
-    "testEnvironment": "jsdom",
-    "collectCoverageFrom": [
-      "**/*.{jsx,tsx,ts,js}",
-      "!server/src/server.ts",
-      "!client/dist/**",
-      "!dist/**",
-      "!client/src/index.tsx",
-      "!client/coverage/**",
-      "!server/coverage/**",
-      "!coverage/**",
-      "!server/babel.config.js",
-      "!client/babel.config.js",
-      "!babel.config.js"
-    ]
+    "prettier": "^2.5.1",
+    "ts-jest": "^27.1.3",
+    "typescript": "^4.6.2"
   }
 }
