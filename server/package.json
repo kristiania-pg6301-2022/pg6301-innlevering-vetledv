@@ -4,7 +4,7 @@
   "main": "server.ts",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon --ext ts,js,json --exec yarn start",
+    "dev": "nodemon",
     "build": "yarn install",
     "start": "ts-node src/server.ts",
     "test": "jest --collectCoverage",
