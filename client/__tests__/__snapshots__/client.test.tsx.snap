@@ -1,10 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`quiz renders Home component 1`] = `"<button class=\\"px-4 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80\\">Get a random question</button>"`;
+exports[`quiz renders Home component 1`] = `
+"<div class=\\"flex justify-center\\">
+  <div class=\\"py-2\\"><button class=\\"px-6 py-3 font-light tracking-wide text-primary text-2xl capitalize transition-colors duration-200 transform bg-secondary rounded-md hover:bg-search-hover focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80\\">Get a random question</button></div>
+</div>"
+`;
 
 exports[`quiz renders RandomQuestion component 1`] = `
-"<button class=\\"px-4 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80\\">Get a new question</button>
-<div>
+"<div class=\\"py-2\\"><button class=\\"px-6 py-3 font-light tracking-wide text-primary text-2xl capitalize transition-colors duration-200 transform bg-secondary rounded-md hover:bg-search-hover focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80\\">Get a new question</button></div>
+<div class=\\"border border-gray-700 px-4 py-2\\">
   <div>Loading...</div>
 </div>"
 `;
