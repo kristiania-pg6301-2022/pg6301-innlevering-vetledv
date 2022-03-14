@@ -9,7 +9,7 @@
 
 <h6 align="center">
 
-![GitHub repo size](https://img.shields.io/github/repo-size/kristiania-pg6301-2022/pg6301-innlevering-runejac)
+![GitHub repo size](https://img.shields.io/github/repo-size/kristiania-pg6301-2022/pg6301-innlevering-vetledv)
 ![Parcel](https://badges.aleen42.com/src/parcel.svg)
 ![React](https://badges.aleen42.com/src/react.svg)
 ![Node](https://badges.aleen42.com/src/node.svg)
