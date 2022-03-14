@@ -2,13 +2,15 @@
 
 exports[`quiz renders Home component 1`] = `
 "<div class=\\"flex justify-center\\">
-  <div class=\\"py-2\\"><button class=\\"px-6 py-3 font-light tracking-wide text-primary text-2xl capitalize transition-colors duration-200 transform bg-secondary rounded-md hover:bg-search-hover focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80\\">Get a random question</button></div>
+  <div class=\\"py-2\\"><button class=\\"px-6 py-3 font-light tracking-wide text-primary text-2xl transition-colors transform bg-searchhover rounded-md hover:bg-secondary focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80 shadow-md\\">Get a random question</button></div>
 </div>"
 `;
 
 exports[`quiz renders RandomQuestion component 1`] = `
-"<div class=\\"py-2\\"><button class=\\"px-6 py-3 font-light tracking-wide text-primary text-2xl capitalize transition-colors duration-200 transform bg-secondary rounded-md hover:bg-search-hover focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80\\">Get a new question</button></div>
-<div class=\\"border border-gray-700 px-4 py-2\\">
-  <div>Loading...</div>
+"<div class=\\"w-full\\">
+  <div class=\\"py-2\\"><button class=\\"px-6 py-3 font-light tracking-wide text-primary text-2xl transition-colors transform bg-searchhover rounded-md hover:bg-secondary focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80 shadow-md\\">Get a new question</button></div>
+  <div class=\\"rounded-lg bg-secondary px-4 py-2\\">
+    <div>Loading...</div>
+  </div>
 </div>"
 `;
