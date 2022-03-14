@@ -20,7 +20,7 @@ export const SunIcon = () => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
-      className='h-6 w-6'
+      className='h-12 w-12'
       fill='none'
       viewBox='0 0 24 24'
       stroke='currentColor'>
@@ -36,14 +36,14 @@ export const SunIcon = () => {
 
 export const ReactIcon = () => {
   return (
-    <div className='p-1'>
+    <div className='px-1'>
       <svg
         width='100%'
         height='100%'
         viewBox='0 0 410 369'
         fill='none'
         xmlns='http://www.w3.org/2000/svg'
-        className='h-6 w-6'>
+        className='h-12 w-12'>
         <path
           d='M204.995 224.552C226.56 224.552 244.042 207.07 244.042 185.506C244.042 163.941 226.56 146.459 204.995 146.459C183.43 146.459 165.948 163.941 165.948 185.506C165.948 207.07 183.43 224.552 204.995 224.552Z'
           fill='currentColor'></path>
