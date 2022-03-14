@@ -50,13 +50,13 @@ export const RandomQuestion = () => {
         {query.isError && <div>Error: {query.error.message}</div>}
         {query.data && (
           <div>
-            <div className='text-xl font-bold py-2 shadow-md'>{query.data.question}</div>
+            <div className='text-2xl font-bold py-2 shadow-md'>{query.data.question}</div>
             {Object.keys(query.data.answers)
               .filter((a) => query.data.answers[a])
               .map((a) => (
                 <div className='py-2' key={a}>
                   <label className='flex flex-row'>
-                    <div className='px-1'>
+                    <div className='px-1 py-1'>
                       <input
                         type='radio'
                         value={a}
@@ -66,7 +66,7 @@ export const RandomQuestion = () => {
                         }}
                       />
                     </div>
-                    <div className='px-1'>{query.data.answers[a]}</div>
+                    <div className='px-1 text-xl'>{query.data.answers[a]}</div>
                   </label>
                 </div>
               ))}
