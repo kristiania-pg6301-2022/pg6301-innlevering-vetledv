@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { AnswerCorrect, TMutate } from '../interfaces/components'
 import { TQuestions } from '../interfaces/fetch'
 import { useRandomQuestion } from './../hooks/useQuestions'
+import { Button } from '../components/Button'
 
 const postQuestions = async (url: string, json: Object) => {
   const res = await fetch(url, {
@@ -67,7 +68,7 @@ export const RandomQuestion = () => {
                   </label>
                 </div>
               ))}
-            <button onClick={() => handleSubmit()}>Submit</button>
+            <Button handleClick={handleSubmit} />
             {checkAnswer.isSuccess && (
               <div>
                 {checkAnswer.data.answerCorrect
