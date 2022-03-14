@@ -1,7 +1,6 @@
 import { useQuery } from 'react-query'
 import { TQuestions } from '../interfaces/fetch'
 
-
 const fetchQuestions = (url: string) => {
   return async () => {
     const res = await fetch(url)

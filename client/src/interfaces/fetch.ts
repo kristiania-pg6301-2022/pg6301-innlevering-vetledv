@@ -1,4 +1,3 @@
-
 export interface TQuestions {
   id: number
   question: string
@@ -6,7 +5,7 @@ export interface TQuestions {
   answers: Record<string, string | null>
   multiple_correct_answers?: 'true' | 'false'
   correct_answers: Record<string, 'true' | 'false'>
-  correct_answer:string
+  correct_answer: string
   explanation?: string | null
   tip?: string | null
   tags?: Tag[]

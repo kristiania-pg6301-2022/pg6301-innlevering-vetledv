@@ -17,17 +17,14 @@ quizApp.get('/questions', (req: express.Request, res: express.Response) => {
   res.json({ id, category, question, answers })
 })
 
-quizApp.post(
-  '/questions',
-  (req: express.Request, res: express.Response) => {
-    const { id, answer }: { id: number; answer: string } = req.body
-    const question = questions.find((q) => q.id === id)
-    if (question) {
-      let answerCorrect = false
-      if (isCorrectAnswer(question, answer)) {
-        answerCorrect = true
-        return res.json({ answerCorrect })
-      } else return res.json({ answerCorrect })
-    }
+quizApp.post('/questions', (req: express.Request, res: express.Response) => {
+  const { id, answer }: { id: number; answer: string } = req.body
+  const question = questions.find((q) => q.id === id)
+  if (question) {
+    let answerCorrect = false
+    if (isCorrectAnswer(question, answer)) {
+      answerCorrect = true
+      return res.json({ answerCorrect })
+    } else return res.json({ answerCorrect })
   }
-)
+})

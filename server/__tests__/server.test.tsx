@@ -11,11 +11,11 @@ describe('Start testing server side', () => {
   it('return status 200', async () => {
     const response = await request(app).get('/api/questions').expect(200)
     expect(response.body).toMatchObject({
-        id: expect.any(Number),
-        question: expect.any(String),
-        answers: expect.any(Object),
-        category: expect.any(String),
-      });
-      expect(response.body).not.toHaveProperty("correct_answers");
+      id: expect.any(Number),
+      question: expect.any(String),
+      answers: expect.any(Object),
+      category: expect.any(String),
+    })
+    expect(response.body).not.toHaveProperty('correct_answers')
   })
 })
