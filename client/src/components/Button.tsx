@@ -7,7 +7,7 @@ export const Button: React.FC<TButton> = ({ children, clickHandler }) => {
     <div className='py-2'>
       <button
         onClick={clickHandler}
-        className='px-6 py-3 font-light tracking-wide text-primary text-2xl capitalize transition-colors duration-200 transform bg-secondary rounded-md hover:bg-search-hover focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80'>
+        className='px-6 py-3 font-light tracking-wide text-primary text-2xl transition-colors transform bg-searchhover rounded-md hover:bg-secondary focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80 shadow-md'>
         {children}
       </button>
     </div>
