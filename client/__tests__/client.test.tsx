@@ -1,15 +1,13 @@
+import pretty from 'pretty'
 import React from 'react'
 import { render, unmountComponentAtNode } from 'react-dom'
+import { QueryClient, QueryClientProvider } from 'react-query'
 import { MemoryRouter } from 'react-router-dom'
 import { Home } from '../src/pages/Home'
-import pretty from 'pretty'
-import { act } from 'react-dom/test-utils'
 import { RandomQuestion } from '../src/pages/RandomQuestion'
-import { QueryClient, QueryClientProvider } from 'react-query'
 
 describe('quiz', () => {
   let container: HTMLDivElement
-
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -36,7 +34,6 @@ describe('quiz', () => {
       </MemoryRouter>,
       container
     )
-
     expect(pretty(container.innerHTML)).toMatchSnapshot()
   })
   it('renders RandomQuestion component', () => {
@@ -48,7 +45,6 @@ describe('quiz', () => {
       </QueryClientProvider>,
       container
     )
-
     expect(pretty(container.innerHTML)).toMatchSnapshot()
   })
 })
