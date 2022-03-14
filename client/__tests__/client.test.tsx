@@ -4,9 +4,21 @@ import { MemoryRouter } from 'react-router-dom'
 import { Home } from '../src/pages/Home'
 import pretty from 'pretty'
 import { act } from 'react-dom/test-utils'
+import { RandomQuestion } from '../src/pages/RandomQuestion'
+import { QueryClient, QueryClientProvider } from 'react-query'
 
 describe('quiz', () => {
   let container: HTMLDivElement
+
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+        refetchOnMount: true,
+        keepPreviousData: true,
+      },
+    },
+  })
 
   beforeEach(async () => {
     container = await document.createElement('div')
@@ -17,11 +29,23 @@ describe('quiz', () => {
     jest.fn().mockClear()
   })
 
-  it('should render Home component', () => {
+  it('renders Home component', () => {
     render(
       <MemoryRouter>
         <Home />
       </MemoryRouter>,
+      container
+    )
+
+    expect(pretty(container.innerHTML)).toMatchSnapshot()
+  })
+  it('renders RandomQuestion component', () => {
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <RandomQuestion />
+        </MemoryRouter>
+      </QueryClientProvider>,
       container
     )
 
