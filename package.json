@@ -15,7 +15,7 @@
     "start": "cd server && yarn start",
     "p:check": "prettier --check **/*.{js,jsx,ts,tsx}",
     "p:format": "prettier --write **/*.{js,jsx,ts,tsx}",
-    "test": "jest",
+    "test": "jest --collectCoverage",
     "verify": "yarn p:check && yarn test && yarn verify:server && yarn verify:client",
     "verify:server": "cd server && yarn verify",
     "verify:client": "cd client && yarn verify"
@@ -35,9 +35,16 @@
     "testEnvironment": "jsdom",
     "collectCoverageFrom": [
       "**/*.{jsx,tsx,ts,js}",
-      "!server/server.ts",
+      "!server/src/server.ts",
+      "!client/dist/**",
       "!dist/**",
-      "!client/index.tsx"
+      "!client/src/index.tsx",
+      "!client/coverage/**",
+      "!server/coverage/**",
+      "!coverage/**",
+      "!server/babel.config.js",
+      "!client/babel.config.js",
+      "!babel.config.js"
     ]
   }
 }
