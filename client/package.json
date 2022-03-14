@@ -42,7 +42,9 @@
       "!dist/**",
       "!babel.config.js",
       "!index.tsx",
-      "!interfaces/"
+      "!interfaces/",
+      "!postcss.config.js",
+      "!tailwind.config.js"
     ]
   }
 }

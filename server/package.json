@@ -36,7 +36,10 @@
       "**/*.{jsx,tsx,ts,js}",
       "!dist/**",
       "!babel.config.js",
-      "!questions.ts"
+      "!questions.ts",
+      "!client/tailwind.config.js",
+      "!client/postcss.config.js",
+      "!coverage/**"
     ]
   }
 }
