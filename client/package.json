@@ -5,7 +5,7 @@
   "scripts": {
     "start": "yarn start",
     "dev": "parcel watch public/index.html",
-    "build": "yarn install --production=true && yarn build:parcel",
+    "build": "yarn install --production=false && yarn build:parcel",
     "build:parcel": "parcel build public/index.html",
     "test": "jest --collectCoverage",
     "verify": "tsc"
