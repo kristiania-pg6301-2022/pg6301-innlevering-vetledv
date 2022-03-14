@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "NODE_ENV=production yarn start",
+    "start": "NODE_ENV=development yarn start",
     "dev": "parcel watch public/index.html",
-    "build": "yarn install --production=false && yarn build:parcel",
+    "build": "NODE_ENV=development yarn install --production=false && yarn build:parcel",
     "build:parcel": "parcel build public/index.html",
     "test": "jest --collectCoverage",
     "verify": "tsc"
