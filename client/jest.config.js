@@ -13,7 +13,8 @@ module.exports = {
     '!tailwind.config.js',
     '!jest.config.js',
     '!coverage/**',
-    "!utils.tsx"
+    "!jest.setup.js"
   ],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  setupFiles: ['./jest.setup.js'],
 }

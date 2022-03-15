@@ -9,7 +9,7 @@ const fetchQuestions = (url: string) => {
   }
 }
 export const useRandomQuestion = () => {
-  return useQuery<TQuestions, Error>(
+  return useQuery<any, Error>(
     ['question'],
     fetchQuestions('/api/questions')
   )
