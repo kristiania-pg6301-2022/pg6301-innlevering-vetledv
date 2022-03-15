@@ -1,6 +1,7 @@
 # Innlevering valgfri oppgave PG6301
 <h6 align="center">
-
+  
+[![Build](https://github.com/kristiania-pg6301-2022/pg6301-innlevering-vetledv/actions/workflows/test.yml/badge.svg)](https://github.com/kristiania-pg6301-2022/pg6301-innlevering-vetledv/actions/workflows/test.yml)
 [![Coverage Status](https://coveralls.io/repos/github/kristiania-pg6301-2022/pg6301-innlevering-vetledv/badge.svg?branch=main)](https://coveralls.io/github/kristiania-pg6301-2022/pg6301-innlevering-vetledv?branch=main)
 
 </h6>
