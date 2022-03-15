@@ -1,4 +1,4 @@
-import { createRef, useState } from 'react'
+import { createRef, LegacyRef, MutableRefObject, useRef, useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { Link, useNavigate } from 'react-router-dom'
 import { AnswerCorrect, TMutate } from '../interfaces/components'
@@ -21,12 +21,12 @@ export const RandomQuestion = () => {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
   const [answer, setAnswer] = useState<string>('')
-  const query = useRandomQuestion('api/questions')
+  const query = useRandomQuestion()
   const checkAnswer = useMutation<AnswerCorrect, Error, TMutate, () => void>(
     ({ id, answer }) => postQuestions('/api/questions', { id, answer })
   )
   //TODO: blur input on button click
-  const inputRef = createRef<HTMLInputElement>()
+  const inputRef = useRef<HTMLDivElement>(null)
 
   const handleSubmit = async () => {
     if (answer !== '' && query.data) {
@@ -83,7 +83,12 @@ export const RandomQuestion = () => {
                 ))}
             </div>
             <div className='flex gap-2'>
-              <Button clickHandler={() => handleSubmit()}>Submit</Button>
+              <Button
+                clickHandler={() => {
+                  handleSubmit()
+                }}>
+                Submit
+              </Button>
               <Button clickHandler={() => navigate('/')}>Back</Button>
             </div>
             {checkAnswer.isSuccess && (

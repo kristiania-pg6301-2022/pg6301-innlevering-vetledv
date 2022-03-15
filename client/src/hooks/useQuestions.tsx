@@ -8,6 +8,9 @@ const fetchQuestions = (url: string) => {
     return data
   }
 }
-export const useRandomQuestion = (url: string) => {
-  return useQuery<TQuestions, Error>(['question'], fetchQuestions(url))
+export const useRandomQuestion = () => {
+  return useQuery<TQuestions, Error>(
+    ['question'],
+    fetchQuestions('/api/questions')
+  )
 }

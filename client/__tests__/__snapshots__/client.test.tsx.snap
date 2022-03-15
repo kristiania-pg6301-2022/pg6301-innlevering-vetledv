@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`quiz renders Home component 1`] = `
+exports[`quiz render Home component 1`] = `
 "<div class=\\"flex justify-center\\">
   <div class=\\"py-2\\"><button class=\\"px-6 py-3 font-light tracking-wide text-primary text-2xl transition-colors transform bg-searchhover rounded-md hover:bg-secondary focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80 shadow-md\\">Get a random question</button></div>
 </div>"
