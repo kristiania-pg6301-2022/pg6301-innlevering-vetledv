@@ -1,3 +1,6 @@
+import { renderHook } from '@testing-library/react-hooks'
+import { rest } from 'msw'
+import { setupServer } from 'msw/node'
 import pretty from 'pretty'
 import { render as domrender, unmountComponentAtNode } from 'react-dom'
 import {
@@ -7,24 +10,10 @@ import {
   setLogger,
 } from 'react-query'
 import { MemoryRouter } from 'react-router-dom'
+import { useRandomQuestion } from '../src/hooks/useQuestions'
 import { Home } from '../src/pages/Home'
 import { RandomQuestion } from '../src/pages/RandomQuestion'
-import { renderHook } from '@testing-library/react-hooks'
-import { useRandomQuestion } from '../src/hooks/useQuestions'
-import { setupServer } from 'msw/node'
-import { rest } from 'msw'
-import { render } from '@testing-library/react'
 
-export const handlers = [
-  rest.get('*/react-query', (req, res, ctx) => {
-    return res(
-      ctx.status(200),
-      ctx.json({
-        answer: 42,
-      })
-    )
-  }),
-]
 const createTestQueryClient = () =>
   new QueryClient({
     defaultOptions: {
@@ -34,25 +23,35 @@ const createTestQueryClient = () =>
     },
   })
 
-export function renderWithClient(ui: React.ReactElement) {
-  const testQueryClient = createTestQueryClient()
-  const { rerender, ...result } = render(
-    <QueryClientProvider client={testQueryClient}>{ui}</QueryClientProvider>
-  )
-  return {
-    ...result,
-    rerender: (rerenderUi: React.ReactElement) =>
-      rerender(
-        <QueryClientProvider client={testQueryClient}>
-          {rerenderUi}
-        </QueryClientProvider>
-      ),
-  }
-}
+const handlers = [
+  rest.get('*/react-query', (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        answer: 42,
+      })
+    )
+  }),
+]
 
-export function createWrapper() {
+const question = () => ({
+  id: 69,
+  question: "Good day sir what's your name sir",
+  answer: {
+    answer_a: 'My name deez',
+    answer_b: 'Mike Oxlong',
+    answer_c: 'I am under the water please help me',
+  },
+  correct_answers: {
+    answer_a_correct: 'true',
+    answer_b_correct: 'false',
+    answer_c_correct: 'false',
+  },
+})
+
+const createWrapper = () => {
   const testQueryClient = createTestQueryClient()
-  return ({ children }: { children: React.ReactNode }) => (
+  return ({ children }: { children: React.ReactElement }) => (
     <QueryClientProvider client={testQueryClient}>
       {children}
     </QueryClientProvider>
@@ -64,14 +63,6 @@ describe('quiz', () => {
   const queryCache = new QueryCache()
   let container: HTMLDivElement
 
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        retry: false,
-        cacheTime: 0,
-      },
-    },
-  })
   // const wrapper = ({ children }: any) => (
   //   <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   // )
@@ -94,21 +85,6 @@ describe('quiz', () => {
     error: () => {},
   })
 
-  const question = () => ({
-    id: 69,
-    question: "Good day sir what's your name sir",
-    answer: {
-      answer_a: 'My name deez',
-      answer_b: 'Mike Oxlong',
-      answer_c: 'I am under the water please help me',
-    },
-    correct_answers: {
-      answer_a_correct: 'true',
-      answer_b_correct: 'false',
-      answer_c_correct: 'false',
-    },
-  })
-
   test('render Home component', () => {
     domrender(
       <MemoryRouter>
@@ -119,7 +95,8 @@ describe('quiz', () => {
     expect(pretty(container.innerHTML)).toMatchSnapshot()
   })
 
-  test('renders RandomQuestion component', () => {
+  test('render RandomQuestion component', () => {
+    const queryClient = new QueryClient()
     domrender(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
@@ -146,6 +123,7 @@ describe('quiz', () => {
 
     expect(result.current.error).toBeDefined()
   })
+
   test('successful hook', async () => {
     server.use(
       rest.get('/api/questions', (req, res, ctx) => {

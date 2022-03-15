@@ -6,7 +6,7 @@ exports[`quiz render Home component 1`] = `
 </div>"
 `;
 
-exports[`quiz renders RandomQuestion component 1`] = `
+exports[`quiz render RandomQuestion component 1`] = `
 "<div class=\\"w-full\\">
   <div class=\\"py-2\\"><button class=\\"px-6 py-3 font-light tracking-wide text-primary text-2xl transition-colors transform bg-searchhover rounded-md hover:bg-secondary focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80 shadow-md\\">Get a new question</button></div>
   <div class=\\"rounded-lg bg-secondary px-4 py-2\\">
