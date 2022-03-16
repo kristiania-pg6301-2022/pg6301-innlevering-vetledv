@@ -3,8 +3,8 @@ import pretty from 'pretty'
 import { render as domrender, unmountComponentAtNode } from 'react-dom'
 import { QueryClient, QueryClientProvider, setLogger } from 'react-query'
 import { MemoryRouter } from 'react-router-dom'
+import { Layout } from '../src/components/Layout'
 import { useRandomQuestion } from '../src/hooks/useQuestions'
-// import nock = require('nock')
 require('whatwg-fetch')
 import { rest, server } from '../src/mocks/server'
 import { Home } from '../src/pages/Home'
@@ -64,8 +64,6 @@ describe('quiz', () => {
     unmountComponentAtNode(await container)
   })
   afterAll(() => {
-    // nock.restore()
-    // nock.cleanAll()
     server.close()
   })
 
@@ -75,8 +73,17 @@ describe('quiz', () => {
     warn: console.warn,
     error: () => {},
   })
+  test('render Layout', () => {
+    domrender(
+      <MemoryRouter>
+        <Layout></Layout>
+      </MemoryRouter>,
+      container
+    )
+    expect(pretty(container.innerHTML)).toMatchSnapshot()
+  })
 
-  test('render Home component', () => {
+  test('render Home', () => {
     domrender(
       <MemoryRouter>
         <Home />
@@ -86,7 +93,7 @@ describe('quiz', () => {
     expect(pretty(container.innerHTML)).toMatchSnapshot()
   })
 
-  test('render RandomQuestion component', () => {
+  test('render RandomQuestion', () => {
     const queryClient = new QueryClient()
     domrender(
       <QueryClientProvider client={queryClient}>
@@ -99,7 +106,7 @@ describe('quiz', () => {
     expect(pretty(container.innerHTML)).toMatchSnapshot()
   })
 
-  test('failure query hook', async () => {
+  test('error useRandomQuestion', async () => {
     server.use(
       rest.get('*', (req, res, ctx) => {
         return res(ctx.status(500))
@@ -116,7 +123,7 @@ describe('quiz', () => {
     expect(result.current.error).toBeDefined()
   })
 
-  test('successful hook', async () => {
+  test('success useRandomQuestion', async () => {
     const { result, waitFor } = renderHook(() => useRandomQuestion(), {
       wrapper: createWrapper(),
     })
