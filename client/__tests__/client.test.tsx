@@ -1,22 +1,15 @@
 import { renderHook } from '@testing-library/react-hooks'
-import { rest } from 'msw'
-import { setupServer } from 'msw/node'
 import pretty from 'pretty'
 import { render as domrender, unmountComponentAtNode } from 'react-dom'
-import {
-  QueryCache,
-  QueryClient,
-  QueryClientProvider,
-  setLogger,
-} from 'react-query'
+import { QueryClient, QueryClientProvider, setLogger } from 'react-query'
 import { MemoryRouter } from 'react-router-dom'
 import { useRandomQuestion } from '../src/hooks/useQuestions'
+// import nock = require('nock')
+require('whatwg-fetch')
+import { rest, server } from '../src/mocks/server'
 import { Home } from '../src/pages/Home'
 import { RandomQuestion } from '../src/pages/RandomQuestion'
-import nock = require('nock')
-import 'whatwg-fetch'
-// import 'msw'
-// import 'whatwg-fetch'
+
 const createTestQueryClient = () =>
   new QueryClient({
     defaultOptions: {
@@ -26,7 +19,7 @@ const createTestQueryClient = () =>
     },
   })
 
-const question = {
+export const question = {
   id: 69,
   question: "Good day sir what's your name sir",
   answer: {
@@ -42,7 +35,13 @@ const question = {
 }
 
 const createWrapper = () => {
-  const testQueryClient = createTestQueryClient()
+  const testQueryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+      },
+    },
+  })
   return ({ children }: { children: React.ReactElement }) => (
     <QueryClientProvider client={testQueryClient}>
       {children}
@@ -51,32 +50,23 @@ const createWrapper = () => {
 }
 
 describe('quiz', () => {
-  // const server = setupServer(...handlers)
-  const queryCache = new QueryCache()
+  //nock bad, msw good :)
   let container: HTMLDivElement
 
-  // const wrapper = ({ children }: any) => (
-  //   <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  // )
-
   beforeAll(() => {
-    global.fetch = fetch
-    nock.disableNetConnect()
-    //  server.listen()
+    server.listen()
   })
   beforeEach(async () => {
     container = await document.createElement('div')
-    nock.disableNetConnect()
   })
   afterEach(async () => {
-    // server.resetHandlers()
+    server.resetHandlers()
     unmountComponentAtNode(await container)
-    queryCache.clear()
   })
   afterAll(() => {
-    nock.restore()
-    nock.cleanAll()
-    //  server.close()
+    // nock.restore()
+    // nock.cleanAll()
+    server.close()
   })
 
   // silence react-query errors
@@ -110,33 +100,31 @@ describe('quiz', () => {
   })
 
   test('failure query hook', async () => {
-    // server.use(
-    //   rest.get('*', (req, res, ctx) => {
-    //     return res(ctx.status(500))
-    //   })
-    // )
-    const scope = nock('http://example.com').get('/api/data').reply(500)
+    server.use(
+      rest.get('*', (req, res, ctx) => {
+        return res(ctx.status(500))
+      })
+    )
     const { result, waitFor } = renderHook(() => useRandomQuestion(), {
       wrapper: createWrapper(),
     })
 
-    await waitFor(() => result.current.isError)
-
+    await waitFor(() => {
+      return result.current.isError
+    })
+    // console.log(result.current.error)
     expect(result.current.error).toBeDefined()
   })
 
   test('successful hook', async () => {
-    // const scope = nock('http://example.com').get('/api/questions').reply(200, {
-    //   answer: 42,
-    // })
-    const scope = nock('http://localhost:3000').get('/api/questions').reply(200, question)
     const { result, waitFor } = renderHook(() => useRandomQuestion(), {
       wrapper: createWrapper(),
     })
-    //testen er feil men passer, skal egt waitFor current.isSuccess, men får timeout. react-query docs er ikke til mye hjelp så er litt usikker her
-    //console.log viser på error at fetch ikke er defined
-    await waitFor(() => result.current.isFetched)
-    expect(result.current).toBeDefined()
-    // expect(result.current.data).toEqual(JSON.stringify(question))
+    await waitFor(() => {
+      return result.current.isSuccess
+    })
+    // console.log(result.current.data)
+    // expect(result.current).toBeDefined()
+    expect(result.current.data).toEqual(question)
   })
 })
