@@ -1,14 +1,12 @@
-import { renderHook } from '@testing-library/react-hooks'
 import pretty from 'pretty'
-import { render as domrender, unmountComponentAtNode } from 'react-dom'
+import { render as reactdomrender, unmountComponentAtNode } from 'react-dom'
 import { QueryClient, QueryClientProvider, setLogger } from 'react-query'
 import { MemoryRouter } from 'react-router-dom'
+import App from '../src/App'
 import { Layout } from '../src/components/Layout'
-import { useRandomQuestion } from '../src/hooks/useQuestions'
-require('whatwg-fetch')
-import { rest, server } from '../src/mocks/server'
 import { Home } from '../src/pages/Home'
 import { RandomQuestion } from '../src/pages/RandomQuestion'
+require('whatwg-fetch')
 
 const createTestQueryClient = () =>
   new QueryClient({
@@ -19,22 +17,7 @@ const createTestQueryClient = () =>
     },
   })
 
-export const question = {
-  id: 69,
-  question: "Good day sir what's your name sir",
-  answer: {
-    answer_a: 'My name deez',
-    answer_b: 'Mike Oxlong',
-    answer_c: 'I am under the water please help me',
-  },
-  correct_answers: {
-    answer_a_correct: 'true',
-    answer_b_correct: 'false',
-    answer_c_correct: 'false',
-  },
-}
-
-const createWrapper = () => {
+export const createWrapper = () => {
   const testQueryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -53,28 +36,15 @@ describe('quiz', () => {
   //nock bad, msw good :)
   let container: HTMLDivElement
 
-  beforeAll(() => {
-    server.listen()
-  })
   beforeEach(async () => {
     container = await document.createElement('div')
   })
   afterEach(async () => {
-    server.resetHandlers()
     unmountComponentAtNode(await container)
   })
-  afterAll(() => {
-    server.close()
-  })
 
-  // silence react-query errors
-  setLogger({
-    log: console.log,
-    warn: console.warn,
-    error: () => {},
-  })
   test('render Layout', () => {
-    domrender(
+    reactdomrender(
       <MemoryRouter>
         <Layout></Layout>
       </MemoryRouter>,
@@ -82,9 +52,13 @@ describe('quiz', () => {
     )
     expect(pretty(container.innerHTML)).toMatchSnapshot()
   })
+  test('render App', () => {
+    reactdomrender(<App />, container)
+    expect(pretty(container.innerHTML)).toMatchSnapshot()
+  })
 
   test('render Home', () => {
-    domrender(
+    reactdomrender(
       <MemoryRouter>
         <Home />
       </MemoryRouter>,
@@ -95,7 +69,7 @@ describe('quiz', () => {
 
   test('render RandomQuestion', () => {
     const queryClient = new QueryClient()
-    domrender(
+    reactdomrender(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
           <RandomQuestion />
@@ -104,34 +78,5 @@ describe('quiz', () => {
       container
     )
     expect(pretty(container.innerHTML)).toMatchSnapshot()
-  })
-
-  test('error useRandomQuestion', async () => {
-    server.use(
-      rest.get('*', (req, res, ctx) => {
-        return res(ctx.status(500))
-      })
-    )
-    const { result, waitFor } = renderHook(() => useRandomQuestion(), {
-      wrapper: createWrapper(),
-    })
-
-    await waitFor(() => {
-      return result.current.isError
-    })
-    // console.log(result.current.error)
-    expect(result.current.error).toBeDefined()
-  })
-
-  test('success useRandomQuestion', async () => {
-    const { result, waitFor } = renderHook(() => useRandomQuestion(), {
-      wrapper: createWrapper(),
-    })
-    await waitFor(() => {
-      return result.current.isSuccess
-    })
-    // console.log(result.current.data)
-    // expect(result.current).toBeDefined()
-    expect(result.current.data).toEqual(question)
   })
 })

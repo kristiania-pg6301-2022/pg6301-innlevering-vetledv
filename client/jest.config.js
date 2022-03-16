@@ -8,13 +8,15 @@ module.exports = {
     '!dist/**',
     '!babel.config.js',
     '!index.tsx',
+    '!src/index.tsx',
     '!interfaces/',
     '!postcss.config.js',
     '!tailwind.config.js',
     '!jest.config.js',
     '!coverage/**',
-    "!jest.setup.js"
+    "!jest.setup.js",
+    "!src/mocks/**"
   ],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
-  setupFiles: ['./jest.setup.js'],
+  setupFilesAfterEnv: ['./jest.setup.ts'],
 }
