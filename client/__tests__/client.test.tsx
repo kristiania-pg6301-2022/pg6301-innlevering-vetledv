@@ -79,4 +79,5 @@ describe('quiz', () => {
     )
     expect(pretty(container.innerHTML)).toMatchSnapshot()
   })
+
 })
