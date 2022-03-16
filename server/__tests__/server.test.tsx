@@ -10,13 +10,13 @@ app.use('/api', quizApp)
 
 describe('Server tests', () => {
   it('returns status 200', async () => {
-    const res = await request(app).get('/api/questions').expect(200)
+    const res = await request(app).get('/api/questions/v1/random').expect(200)
   })
   it('returns status 404', async () => {
     await request(app).get('/deez').expect(404)
   })
   it('returns a random question', async () => {
-    const res = await request(app).get('/api/questions')
+    const res = await request(app).get('/api/questions/v1/random')
     expect(res.body).toMatchObject<TReqProps>({
       id: expect.any(Number),
       answers: expect.any(Object),
@@ -28,7 +28,7 @@ describe('Server tests', () => {
 
   it('responds with bool true on post', async () => {
     await request(app)
-      .post('/api/questions')
+      .post('/api/questions/v1/random')
       .send({
         id: 993,
         answer: 'answer_d',
@@ -37,7 +37,7 @@ describe('Server tests', () => {
   })
   it('responds with bool false on post', async () => {
     await request(app)
-      .post('/api/questions')
+      .post('/api/questions/v1/random')
       .send({
         id: 993,
         answer: 'answer_c',

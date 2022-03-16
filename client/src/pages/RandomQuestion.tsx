@@ -23,7 +23,7 @@ export const RandomQuestion = () => {
   const [answer, setAnswer] = useState<string>('')
   const query = useRandomQuestion()
   const checkAnswer = useMutation<AnswerCorrect, Error, TMutate, () => void>(
-    ({ id, answer }) => postQuestions('/api/questions', { id, answer })
+    ({ id, answer }) => postQuestions('api/questions/v1/random', { id, answer })
   )
   //TODO: blur input on button click
   const inputRef = useRef<HTMLDivElement>(null)
@@ -44,6 +44,9 @@ export const RandomQuestion = () => {
     }
   }
 
+  if (query.isLoading || query.isRefetching)
+    return <div className='text-2xl font-bold py-2'>Loading...</div>
+
   return (
     <div className='w-full'>
       <Button
@@ -54,9 +57,13 @@ export const RandomQuestion = () => {
         Get a new question
       </Button>
       <div className='rounded-lg bg-secondary px-4 py-2'>
-        {query.isLoading && <div>Loading...</div>}
-        {query.isError && <div>Error: {query.error.message}</div>}
-        {query.data && (
+        {query.isError && (
+          <div className='text-2xl font-bold py-2'>
+            Error: {query.error.message}
+          </div>
+        )}
+
+        {query.data && query.isSuccess && (
           <div>
             <div className='text-2xl font-bold py-2'>{query.data.question}</div>
             <div className='px-4'>

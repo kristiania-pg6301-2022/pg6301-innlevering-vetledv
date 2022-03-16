@@ -11,6 +11,6 @@ const fetchQuestions = (url: string) => {
 export const useRandomQuestion = () => {
   return useQuery<TQuestions, Error>(
     ['question'],
-    fetchQuestions('/api/questions')
+    fetchQuestions('/api/questions/v1/random')
   )
 }

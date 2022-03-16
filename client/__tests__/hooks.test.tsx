@@ -18,7 +18,6 @@ describe('custom hooks', () => {
     await waitFor(() => {
       return result.current.isError
     })
-    // console.log(result.current.error)
     expect(result.current.error).toBeDefined()
   })
 
@@ -29,7 +28,6 @@ describe('custom hooks', () => {
     await waitFor(() => {
       return result.current.isSuccess
     })
-    // console.log(result.current.data)
     expect(result.current.data).toEqual({ id, category, question, answers })
     expect(result.current.data).not.toContain({ correct_answers })
   })
