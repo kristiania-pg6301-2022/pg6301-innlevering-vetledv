@@ -15,6 +15,8 @@ module.exports = {
     '!server/**.config.js',
     '!client/**.config.js',
     '!**.config.js',
+    '!client/**.setup.ts',
+    '!client/src/mocks/**'
   ],
   testMatch: ['**/__tests__/**.test.{jsx,tsx,ts,js}'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
