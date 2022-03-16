@@ -2,7 +2,7 @@ import { renderHook } from '@testing-library/react-hooks'
 import { rest, server } from '../src/mocks/server'
 import { useRandomQuestion } from '../src/hooks/useQuestions'
 import { createWrapper } from './client.test'
-import { id, category, question, answers } from '../jest.setup'
+import { id, category, question, answers, correct_answers } from '../jest.setup'
 
 describe('custom hooks', () => {
   test('error useRandomQuestion', async () => {
@@ -31,5 +31,6 @@ describe('custom hooks', () => {
     })
     // console.log(result.current.data)
     expect(result.current.data).toEqual({ id, category, question, answers })
+    expect(result.current.data).not.toContain({ correct_answers })
   })
 })

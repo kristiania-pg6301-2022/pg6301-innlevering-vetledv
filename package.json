@@ -16,11 +16,12 @@
     "p:check": "prettier --check **/*.{js,jsx,ts,tsx}",
     "p:format": "prettier --write **/*.{js,jsx,ts,tsx}",
     "test": "jest --collectCoverage",
-    "test:client" : "cd client && yarn test",
-    "test:server" : "cd server && yarn test",
+    "test:client": "cd client && yarn test",
+    "test:server": "cd server && yarn test",
     "verify": "yarn p:check && yarn test && yarn verify:server && yarn verify:client",
     "verify:server": "cd server && yarn verify",
-    "verify:client": "cd client && yarn verify"
+    "verify:client": "cd client && yarn verify",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@types/body-parser": "^1.19.2",
@@ -28,6 +29,7 @@
     "@types/jest": "^27.4.1",
     "concurrently": "^7.0.0",
     "coveralls": "^3.1.1",
+    "husky": "^7.0.4",
     "jest": "^27.5.1",
     "prettier": "^2.5.1",
     "ts-jest": "^27.1.3",

@@ -34,5 +34,5 @@ export const questionTestObj = {
   category: 'deez',
 }
 
-export const { id, category, question, answers, correct_answers } = questionTestObj
-
+export const { id, category, question, answers, correct_answers } =
+  questionTestObj
