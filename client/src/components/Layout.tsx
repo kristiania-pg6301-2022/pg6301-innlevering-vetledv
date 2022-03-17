@@ -1,5 +1,6 @@
-import { Nav } from './Nav'
 import { Footer } from './Footer'
+import { Nav } from './Nav'
+
 export const Layout: React.FC = ({ children }) => {
   return (
     <div className='flex justify-between flex-col min-h-screen'>

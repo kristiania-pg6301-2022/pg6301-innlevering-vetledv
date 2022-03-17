@@ -1,5 +1,5 @@
 import { IThemeBtn } from '../interfaces/components'
-import { SunIcon, MoonIcon } from './Icons'
+import { MoonIcon, SunIcon } from './Icons'
 
 export const ThemeBtn = ({ colorTheme, setTheme }: IThemeBtn) => {
   return (

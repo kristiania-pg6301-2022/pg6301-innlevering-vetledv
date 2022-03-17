@@ -1,4 +1,3 @@
-import { useTheme } from '../hooks/useDarkMode'
 import { ReactIcon } from './Icons'
 
 export const Footer = () => {

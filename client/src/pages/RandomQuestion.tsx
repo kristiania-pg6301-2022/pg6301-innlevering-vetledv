@@ -1,10 +1,9 @@
-import { createRef, LegacyRef, MutableRefObject, useRef, useState } from 'react'
-import { useMutation, useQuery, useQueryClient } from 'react-query'
-import { Link, useNavigate } from 'react-router-dom'
-import { AnswerCorrect, TMutate } from '../interfaces/components'
-import { TQuestions } from '../interfaces/fetch'
-import { useRandomQuestion } from './../hooks/useQuestions'
+import { useState } from 'react'
+import { useMutation, useQueryClient } from 'react-query'
+import { useNavigate } from 'react-router-dom'
 import { Button } from '../components/Button'
+import { AnswerCorrect, TMutate } from '../interfaces/components'
+import { useRandomQuestion } from './../hooks/useQuestions'
 
 const postQuestions = async (json: Object) => {
   const res = await fetch('/api/questions/v1/random', {
