@@ -30,12 +30,6 @@ exports[`quiz render App 1`] = `
 </div>"
 `;
 
-exports[`quiz render Home 1`] = `
-"<div class=\\"flex justify-center\\">
-  <div class=\\"py-2\\"><button class=\\"px-6 py-3 font-light tracking-wide text-primary text-2xl transition-colors transform bg-searchhover rounded-md hover:bg-secondary focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80 shadow-md\\">Get a random question</button></div>
-</div>"
-`;
-
 exports[`quiz render Layout 1`] = `
 "<div class=\\"flex justify-between flex-col min-h-screen\\">
   <div class=\\"flex flex-col min-w-full justify-center items-center\\">
@@ -62,4 +56,10 @@ exports[`quiz render Layout 1`] = `
 </div>"
 `;
 
-exports[`quiz render RandomQuestion 1`] = `"<div class=\\"text-2xl font-bold py-2\\">Loading...</div>"`;
+exports[`quiz render page Home 1`] = `
+"<div class=\\"flex justify-center\\">
+  <div class=\\"py-2\\"><button class=\\"px-6 py-3 font-light tracking-wide text-primary text-2xl transition-colors transform bg-searchhover rounded-md hover:bg-secondary focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80 shadow-md\\">Get a random question</button></div>
+</div>"
+`;
+
+exports[`quiz render page RandomQuestion 1`] = `"<div class=\\"text-2xl font-bold py-2\\">Loading...</div>"`;

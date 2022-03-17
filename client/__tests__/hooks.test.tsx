@@ -1,8 +1,8 @@
 import { renderHook } from '@testing-library/react-hooks'
-import { rest, server } from '../src/mocks/server'
+import { answers, category, correct_answers, id, question } from '../jest.setup'
 import { useRandomQuestion } from '../src/hooks/useQuestions'
+import { rest, server } from '../src/mocks/server'
 import { createWrapper } from './client.test'
-import { id, category, question, answers, correct_answers } from '../jest.setup'
 
 describe('custom hooks', () => {
   test('error useRandomQuestion', async () => {

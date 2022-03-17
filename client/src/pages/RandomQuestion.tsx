@@ -25,8 +25,6 @@ export const RandomQuestion = () => {
   const checkAnswer = useMutation<AnswerCorrect, Error, TMutate, () => void>(
     ({ id, answer }) => postQuestions('api/questions/v1/random', { id, answer })
   )
-  //TODO: blur input on button click
-  const inputRef = useRef<HTMLDivElement>(null)
 
   const handleSubmit = async () => {
     if (answer !== '' && query.data) {
