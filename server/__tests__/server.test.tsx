@@ -6,11 +6,11 @@ import { quizApp } from '../src/quizApi'
 
 const app: Express = express()
 app.use(bodyParser.json())
-app.use('/api', quizApp)
+app.use('/api/questions/v1', quizApp)
 
 describe('Server tests', () => {
   it('returns status 200', async () => {
-    const res = await request(app).get('/api/questions/v1/random').expect(200)
+    await request(app).get('/api/questions/v1/random').expect(200)
   })
   it('returns status 404', async () => {
     await request(app).get('/deez').expect(404)

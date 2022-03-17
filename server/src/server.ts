@@ -13,7 +13,7 @@ export interface TReqResNext {
 const app: Express = express()
 app.use(bodyParser.json())
 
-app.use('/api', quizApp)
+app.use('/api/questions/v1', quizApp)
 
 app.use(express.static('../client/dist'))
 app.use(

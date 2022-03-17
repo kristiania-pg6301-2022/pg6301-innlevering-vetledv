@@ -15,7 +15,8 @@ module.exports = {
     '!jest.config.js',
     '!coverage/**',
     "!jest.setup.js",
-    "!src/mocks/**"
+    "!src/mocks/**",
+    "!__tests__/utils.tsx"
   ],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   setupFilesAfterEnv: ['./jest.setup.ts'],

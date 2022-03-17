@@ -6,8 +6,8 @@ import { TQuestions } from '../interfaces/fetch'
 import { useRandomQuestion } from './../hooks/useQuestions'
 import { Button } from '../components/Button'
 
-const postQuestions = async (url: string, json: Object) => {
-  const res = await fetch(url, {
+const postQuestions = async (json: Object) => {
+  const res = await fetch('/api/questions/v1/random', {
     method: 'post',
     headers: {
       'content-type': 'application/json',
@@ -23,7 +23,7 @@ export const RandomQuestion = () => {
   const [answer, setAnswer] = useState<string>('')
   const query = useRandomQuestion()
   const checkAnswer = useMutation<AnswerCorrect, Error, TMutate, () => void>(
-    ({ id, answer }) => postQuestions('api/questions/v1/random', { id, answer })
+    ({ id, answer }) => postQuestions({ id, answer })
   )
 
   const handleSubmit = async () => {

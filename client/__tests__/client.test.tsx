@@ -1,17 +1,14 @@
-import { renderHook } from '@testing-library/react-hooks'
-import { render, screen, waitFor } from '@testing-library/react'
+import '@testing-library/jest-dom'
+import { render } from '@testing-library/react'
 import pretty from 'pretty'
 import { render as reactdomrender, unmountComponentAtNode } from 'react-dom'
-import { QueryClient, QueryClientProvider, setLogger } from 'react-query'
+import { QueryClient, QueryClientProvider } from 'react-query'
 import { MemoryRouter } from 'react-router-dom'
 import App from '../src/App'
 import { Layout } from '../src/components/Layout'
 import { Home } from '../src/pages/Home'
 import { RandomQuestion } from '../src/pages/RandomQuestion'
-import { rest, server } from '../src/mocks/server'
 require('whatwg-fetch')
-import '@testing-library/jest-dom'
-import { id } from '../jest.setup'
 
 const createTestQueryClient = () =>
   new QueryClient({
@@ -22,6 +19,7 @@ const createTestQueryClient = () =>
     },
   })
 
+//wrap custom hook in wrapper
 export const createWrapper = () => {
   const testQueryClient = new QueryClient({
     defaultOptions: {
@@ -36,7 +34,9 @@ export const createWrapper = () => {
     </QueryClientProvider>
   )
 }
-export function renderWithClient(ui: React.ReactElement) {
+//internal function used from react-query
+//https://github.com/tannerlinsley/react-query/blob/ead2e5dd5237f3d004b66316b5f36af718286d2d/src/react/tests/utils.tsx#L6-L17
+export const renderWithClient = (ui: React.ReactElement) => {
   const testQueryClient = createTestQueryClient()
   const { rerender, ...result } = render(
     <QueryClientProvider client={testQueryClient}>{ui}</QueryClientProvider>
@@ -98,39 +98,5 @@ describe('quiz', () => {
       container
     )
     expect(pretty(container.innerHTML)).toMatchSnapshot()
-  })
-  test('loading on page RandomQuestion', async () => {
-    renderWithClient(
-      <MemoryRouter>
-        <RandomQuestion />
-      </MemoryRouter>
-    )
-    expect(await screen.findByText(/Loading.../i)).toBeInTheDocument()
-  })
-  test('error on page RandomQuestion', async () => {
-    server.use(
-      rest.get('*', (req, res, ctx) => {
-        return res(ctx.status(500))
-      })
-    )
-    renderWithClient(
-      <MemoryRouter>
-        <RandomQuestion />
-      </MemoryRouter>
-    )
-
-    expect(await screen.findByText(/Error:/i)).toBeInTheDocument()
-  })
-  test('RandomQuestion page displays data', async () => {
-    renderWithClient(
-      <MemoryRouter>
-        <RandomQuestion />
-      </MemoryRouter>
-    )
-    await waitFor(() => {
-      expect(
-        screen.getByText(/Good day sir what's your name sir/i)
-      ).toBeInTheDocument()
-    })
   })
 })

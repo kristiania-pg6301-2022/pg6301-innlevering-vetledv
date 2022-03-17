@@ -1,8 +1,26 @@
+import { render } from '@testing-library/react'
 import { renderHook } from '@testing-library/react-hooks'
+import { QueryClient, QueryClientProvider } from 'react-query'
 import { answers, category, correct_answers, id, question } from '../jest.setup'
 import { useRandomQuestion } from '../src/hooks/useQuestions'
 import { rest, server } from '../src/mocks/server'
 import { createWrapper } from './client.test'
+
+export const renderWithClient = (
+  client: QueryClient,
+  ui: React.ReactElement
+) => {
+  const { rerender, ...result } = render(
+    <QueryClientProvider client={client}>{ui}</QueryClientProvider>
+  )
+  return {
+    ...result,
+    rerender: (rerenderUi: React.ReactElement) =>
+      rerender(
+        <QueryClientProvider client={client}>{rerenderUi}</QueryClientProvider>
+      ),
+  }
+}
 
 describe('custom hooks', () => {
   test('error useRandomQuestion', async () => {
