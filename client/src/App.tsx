@@ -27,7 +27,7 @@ const App = () => {
           </Routes>
         </Layout>
       </BrowserRouter>
-      <ReactQueryDevtools initialIsOpen />
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   )
 }
