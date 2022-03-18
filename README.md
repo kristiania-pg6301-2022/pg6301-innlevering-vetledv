@@ -1,4 +1,5 @@
 # Innlevering valgfri oppgave PG6301
+https://pg6301innlevering.herokuapp.com/
 <h6 align="center">
   
 [![Build](https://github.com/kristiania-pg6301-2022/pg6301-innlevering-vetledv/actions/workflows/test.yml/badge.svg)](https://github.com/kristiania-pg6301-2022/pg6301-innlevering-vetledv/actions/workflows/test.yml)
