@@ -1,9 +1,11 @@
 import { renderHook } from '@testing-library/react-hooks'
 import { rest } from 'msw'
 import { answers, category, correct_answers, id, question } from '../jest.setup'
-import { useRandomQuestion } from '../src/hooks/useQuestions'
+import { useTheme } from '../src/hooks/useTheme'
+import { useRandomQuestion } from '../src/hooks/useRandomQuestions'
 import { server } from '../src/mocks/server'
 import { createWrapper } from './client.test'
+import { ThemeBtn } from '../src/components/ThemeBtn'
 
 describe('custom hooks', () => {
   test('error useRandomQuestion', async () => {
