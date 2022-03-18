@@ -6,7 +6,7 @@ export const Home = () => {
   return (
     <>
       <div className='flex justify-center'>
-        <Button clickHandler={() => navigate('/questions/v1/random')}>
+        <Button clickHandler={() => navigate('/random')}>
           Get a random question
         </Button>
       </div>

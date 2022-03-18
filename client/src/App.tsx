@@ -22,7 +22,7 @@ const App = () => {
         <Layout>
           <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/questions/v1/random' element={<RandomQuestion />} />
+            <Route path='/random' element={<RandomQuestion />} />
             <Route path='*' element={<div>404</div>} />
           </Routes>
         </Layout>
