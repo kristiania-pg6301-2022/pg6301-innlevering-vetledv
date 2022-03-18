@@ -4,6 +4,7 @@ import { MoonIcon, SunIcon } from './Icons'
 export const ThemeBtn = ({ colorTheme, setTheme }: IThemeBtn) => {
   return (
     <span
+      aria-label='theme button'
       onClick={() => {
         setTheme(colorTheme)
       }}
